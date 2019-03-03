@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>es</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+
+var fact = function(){
+	this.a ='q';
+	this.b='gg';
+	this.c={
+		a:'a1',
+		b:function(){
+			return this.a
+		}
+	}
+
+}
+//es5中的this永远指向该函数被调用的对象  如上即调用this.c
+//
+
+
+console.log(new fact().c.b())  //a1
+
+var facts = function(){
+	this.a ='q';
+	this.b='ff';
+	this.c={
+		a:'a1',
+		b:()=>{
+			return this.a
+		}
+	}
+}
+console.log(new facts().c.b())  //q
+
+//es6中的this指向函数定义时this的指向
+
+var funcs = []
+for (var i = 0; i < 10; i++) {
+    funcs.push(function() { console.log(i) })
+}
+funcs.forEach(function(func) {
+    func()
+})
+
+
+//es5 默认参数
+function gu(x,y,z){
+	console.log(x)
+	if(y==undefined){
+		y=3
+	}
+	if(z==undefined){
+		z=4
+	}
+	console.log(y)
+	console.log(z)
+}
+gu(1)
+
+//es6  如果参数为undefined，es6直接在给赋值
+function bb(a,b=5,c=7){
+	console.log(a)
+	console.log(b)
+	console.log(c)
+}
+bb(9)
+
+
+
+function check(){
+	throw new Error('can\'t be empty')
+}
+function ru(x=check(),y=9,z=90){
+	return x+y+z
+}
+try{
+	ru()
+}catch(e){
+	console.log(e)
+}finally{
+	console.log('999')
+}
+
+
+function t(){
+	console.log(arguments)
+	var a = Array.prototype.slice.call(arguments)
+	console.log(a)
+	var sum=0;
+	a.forEach(function(el){
+		sum+=el*1
+	})
+	return sum
+}
+console.log(t(12,13,44))
+
+function gt(...d){
+	var sum =0;
+	d.forEach(item=>{
+		sum+=item
+	})
+	return sum
+}
+console.log(t(12,13,44))
+
+
+//合并数组  es5
+var arrone =[2,3,4,5,'chai']
+var arrtwo =[2,3,45,52]
+var arrs = arrone.concat(arrtwo)
+console.log(arrs)
+
+
+arrone.forEach((val)=>{
+	console.log(val)
+})
+arrtwo.forEach((val,index)=>{
+	console.log(index,'hhss',val)
+})
+
+let arrc=['jspang','技术胖','前端教程'];
+arrc.filter(x=>console.log(x));
+
+//es6合并数组
+var ff =[0,45,66,55]
+
+var hu = ['s',9]
+var bn = [ff,...hu]
+console.log(bn)
+
+let arrf=['jspang','技术胖','前端教程'];
+console.log(arrf.join('|'));
+
+const near ='函数';
+console.log('我是'+near)
+console.log(`wshi${near}`)
+
+const number = [1,2,3,4,5]
+const [first, ...rest] = number
+console.log(rest) //2,3,4,5
+
+
+
+for(var r=0;r<4;r++){
+	console.log(r)
+}
+console.log('hhhhh'+r)
+
+
+//数组去重
+var tyu =[1,2,2,3,3,3,4,5,5,6]
+console.log(new Set(tyu))
+
+
+let c1 ='我来自府谷';
+let c2 ='农村';
+console.log(`${c1}${c2}`)
+
+
+let json = {
+    '0': 'jspang',
+    '1': '技术胖',
+    '2': '大胖逼逼叨',
+    length:3
+}
+let arr=Array.from(json);
+console.log(arr)
+
+let arg =Array.of(2,3,4,5);
+console.log(arg)
+let arre =Array.of('技术胖','jspang','大胖逼逼叨');
+console.log(arre);
+
+let arqr=[0,1,2,3,4,5,6,7,8,9];
+arqr.fill('jspang',2,5);
+console.log(arqr); //[0, 1, "jspang", "jspang", "jspang", 5, 6, 7, 8, 9]
+
+var bu =()=>{
+	console.log('哈哈哈哈')
+	return 2
+}
+bu()
+
+console.table({
+	name:'kkkkkk'
+})
+
+//promise的基本用法   resolve（同意）,reject（错误）
+let stat =1;
+function stat1(resolve,reject){
+	console.log('开始')
+	if(stat==1){
+		resolve('开始了')
+	}else{
+		reject('不能开始')
+	}
+}
+function stat2(resolve,reject){
+	console.log('过程')
+	//stat=0;  //改变之后报错
+	if(stat==1){
+		resolve('过程。。。。')
+	}else{
+		reject('过程cc。。。。')
+	}
+}
+function stat3(resolve,reject){
+	console.log('结束')
+	if(stat==1){
+		resolve('结束。。。')
+	}else{
+		reject('结束')
+	}
+}
+
+new Promise(stat1)
+.then(function(val){
+	console.log(1)
+	console.log(val)
+	return new Promise(stat2)})
+.then(function(val){
+	console.log(2)
+	console.log(val);
+	return new Promise(stat3)})
+.then(function(val){
+	console.log(3)
+	console.log(val)
+	return val
+})
+var p = new Promise(function(resolve, reject){
+    //做一些异步操作
+    setTimeout(function(){
+        console.log('执行完成');
+        resolve('随便什么数据');
+    }, 2000);
+});
+
+
+
+</script>
+</html>

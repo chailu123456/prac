@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	
+</body>
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+
+
+
+var a =8;
+var func = (function(){
+	var a =10;
+	return function(){
+		a++;
+		console.log(a)
+	}
+})()
+func()
+func()
+
+
+// for ( var i=1; i<=5; i++) {
+// 	setTimeout( function timer() {
+// 		console.log( i );
+// 	}, i*1000 );
+// }
+
+
+// for(let i=0;i<5;i++){
+// 	setTimeout(function timer(){
+// 		console.log(i)
+// 	},i*300)
+// }
+for(var i=0;i<5;i++){
+	setTimeout(function timer(j){
+		console.log(j)
+	},i*300,i)
+}
+
+
+function student(name){
+	this.name = name;
+	console.log(this.name)
+}
+student('李三')
+
+ function ad(a){
+	console.log(a)
+	console.log(arguments)
+	console.log(arguments[0])
+	return 6;
+}
+var nu =ad(12,23)
+console.log(nu)
+
+
+function bu(){
+	console.log(nu)
+
+}
+bu()
+
+
+//斐波拉切
+function fei(n){
+	if(n==1 || n==2){
+		return 1
+	}else{
+		return fei(n-1)+fei(n-2)
+	}
+}
+console.log(fei(7))
+
+var factorial = function fn(num){
+    if(num <=1){
+        return 1;
+    }else{
+        return num-fn(num-1);
+    }
+};    
+console.log(factorial(5));
+
+
+var nums = 99;
+yu()
+function yu(){
+	console.log(nums)  //undefined  变量提升 yu函数里的声明相当于var nums; console.log(nums);nums=78
+	var nums = 78;
+}
+
+Array.prototype.test='测试';
+Array.prototype.eat=function(d){
+	console.log(d+'我在这')
+};
+var ab = new Array();
+ab.test;
+
+
+var ty = new Array()
+ty.eat('hi')
+
+
+//构造函数
+function gou(name,age){
+	this.name = name;
+	this.age = age;
+	this.work=function(what){
+		console.log(what)
+	}
+}
+
+var xin = new gou('小李',12);
+xin.name = '柴';
+console.log(xin.name)
+xin.work('学生')
+
+var old = new gou('xiao',23);
+old.work('哈哈哈哈哈哈哈')
+
+
+//第一种写法
+/*
+function dog(opation){
+	this.name = opation.name;
+	this.age = opation.age;
+	this.eat = function(some){
+		console.log(this.name+'在吃'+some)
+	}
+}
+var bigdog = new dog({name:'喔喔',age:'12'});
+bigdog.eat('骨头')
+
+*/
+
+
+//第2种写法
+/*
+function dog(opation){
+	this.name = opation.name;
+	this.age = opation.age;
+}
+dog.prototype.eat = function(some){
+	console.log(this.name+'在吃'+some)
+}
+var bigdog = new dog({name:'喔喔',age:'12'});
+bigdog.eat('骨头')
+*/
+
+
+//第3种写法
+/*
+function dog(opation){
+	this.name = opation.name;
+	this.age = opation.age;
+}
+dog.prototype = {
+	eat:function(some){
+		console.log(this.name+'在吃'+some)
+	}
+}
+var bigdog = new dog({name:'喔喔',age:'12'});
+bigdog.eat('骨头')
+*/
+//第4种写法
+function dog(opation){
+	this._init(opation)
+}
+
+dog.prototype = {
+	_init:function(opation){
+		this.name = opation.name;
+		this.age = opation.age;
+	},
+	eat:function(some){
+		console.log(this.name+'在吃'+some)
+	}
+}
+
+var bigdog = new dog({name:'喔喔',age:'12'});
+bigdog.eat('骨头')
+
+
+
+var name = 'window';
+var getName = function () {
+   var name = 'kobe';  //迷惑性而已
+   var that = this;
+   console.log(that)
+   return that.name;
+}
+console.log(getName() ); //window
+
+function dd(){
+	var name = '之三十';
+	console.log(this.name)
+}
+dd()
+
+
+
+</script>
+</html>

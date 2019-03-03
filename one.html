@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+
+var cv = null;
+if(cv==undefined){
+	alert(9)
+}
+
+
+var de = 9;
+function ff(){
+	console.log(de)   //undefined
+	var de =88;  
+}
+ff()
+
+var tr = new Object();
+tr.name='chailu';
+console.log(tr)
+
+
+function Hu(aaa){
+	this.aaa = aaa;
+	console.log(aaa);
+	
+}
+var g = new Hu(98)
+
+
+
+	console.log(1===1===1)   //false
+	// 二维数组转一维数组
+
+	var arr = [[1,2,3],[4,5,6],[7,8,9]].reduce(function(prev,next){
+		return prev.concat(next)
+	})
+	console.log(arr)
+
+
+	function bu(a){
+		console.log(arguments)
+		return 123;
+	}
+	console.log(bu(1))
+
+	var yu = {
+		btn:function(){
+			console.log(90)
+		},
+		ni:function(){
+			console.log(78)
+		}
+	}
+	yu.btn()
+
+	var a = 1 + 1;
+	function takeLongTime() {
+	    return new Promise(resolve => {
+	        setTimeout(() => {
+	            resolve('Hello World');
+	        }, 2000);
+	    });
+	}
+
+	async function test() {
+	    const v = await takeLongTime();
+	    console.log(a);
+	    console.log(v);
+	}
+	test()
+
+	async function testAsync() {
+	    return "hello async";
+	}
+	const result = testAsync();
+	console.log(result);
+	var o = {
+	    name: 'Jack',
+	    age: 20,
+	    city: 'Beijing'
+	};
+	for (var key in o) {
+	    console.log(o[key]); // 'name', 'age', 'city'
+	}
+
+	
+
+	var a = ['A', 'B', 'C'];
+	a.forEach(function (element, index, array) {
+	    console.log(element);
+	    console.log(index);
+	    console.log(array);
+	});
+console.log(888888888888)
+	console.log(num);  //undefined
+	console.log(fn)  //
+	var num = 13;
+	function fn(){
+		console.log(a)  //undefined
+		var a =10;
+		console.log(a)  //10
+	}
+	fn()
+	console.log(num) //13
+
+
+
+	//数组去重
+	var arr1 = [2,2,3,4,5,5,6,77,77];
+	var newarr =[];
+	function r(arr1){
+		for(var i=0;i<arr1.length;i++){
+			if(newarr.indexOf(arr1[i])==-1){
+				newarr.push(arr1[i])
+			}
+			
+		}
+		return newarr;
+	}
+	var fh =r(arr1)
+	console.log(fh)
+
+	var h =[13,44,33,33,45,54,54,54,76,77];
+
+	for(var t=0;t<h.length;t++){
+		for(var f=0;f<h.length-1;f++){
+			if(h[t] == h[f] && t!=f){
+				h.splice(f,1)
+			}
+		}
+	}
+	
+	console.log(h)
+	function pai(a,b){
+		return a-b;
+	}
+	console.log(h.sort(pai))
+
+	var sort = [22,33,11,44,33,32,76,78,65,99];
+	for(var i=0;i<sort.length;i++){
+		for(var t=0;t<sort.length-1;t++){
+			if(sort[i]<sort[t]){
+				var temp = sort[i];
+				sort[i]=sort[t];
+				sort[t]=temp;
+			}
+		}
+	}
+	console.log(sort)
+
+	function fr(a,b){
+		return a-b;
+	}
+	console.log(sort.sort(fr))
+
+</script>
+</html>
