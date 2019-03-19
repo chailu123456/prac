@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	
+</body>
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+try{
+	let and = 99
+	console.log(and)
+}catch(err) {
+	console.log(err)
+}
+
+let arr = [1,23,4,5,76,4,8,4,5]
+console.log(arr.sort())
+console.log(arr.map(v=>v))
+
+new Promise((resolve, reject) => {
+  console.log('new Promise')
+  resolve('success')
+})
+console.log('finifsh')
+// new Promise -> finifsh
+
+
+
+Promise.resolve(1)
+  .then(res => {
+    console.log(res) // => 1
+    return 2 // 包装成 Promise.resolve(2)
+  })
+  .then(res => {
+    console.log(res) // => 2
+  })
+
+  async function test() {
+	  return "1"
+	}
+	console.log(test()) // -> Promise {<resolved>: "1"}
+
+	async function test1() {
+		await one('第一个')
+		await two('第22222222个')
+		await three('第3333333个')
+		console.log('最后一个')
+	}
+	test1()
+	function one(a) {
+		try{
+			console.log(a2)
+			console.log('das')
+		}catch(err){
+			console.log(err)
+		}
+		
+	}
+	function two(b) {
+		console.log(b)
+	}
+	function three(c) {
+		console.log(c)
+	}
+
+
+	function add(x,y){
+		var sum = x
+    if (y) {
+       return (sum + y)
+    }else{
+      var add2 = function(z){
+         return (sum + z)
+      }
+      return add2
+    }
+  } 
+  let ss = add(3)(4)
+  console.log(ss)
+
+
+
+  function add2(a,b) {
+  	let start = a;
+  	if (b) {
+  		return (start+b)
+  	} else {
+  		let fun = function(c){
+  			return start+c
+  		}
+  		return fun
+  	}
+  }
+
+console.log(add2(300)(4))
+console.log(add(300,4))
+
+
+</script>
+</html>

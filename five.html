@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div class="s" id="app">
+		{{message}}
+	</div>
+	
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  },
+  methods: {
+  	
+  }
+})
+
+
+// 在一个数组中 找出里面其中两项相加后的和为num，如果存在就返回两个数的索引位置，否则false
+
+function fn(num = 0, ary = []) {
+  for (let i = 0; i < ary.length; i++) {
+    let diff = num - ary[i];  // 减数=和-另一个加数
+    let diffIndex = ary.indexOf(diff);
+    console.log(diffIndex)
+    if (diffIndex !== -1) {
+      return [i, diffIndex];
+    }
+  }
+  return false;
+}
+
+let num = 3;
+let arr = [-1, 2, 6, 4];
+
+console.log(fn(num, arr)); // [0, 1]
+
+console.log('-----------')
+let mapArr = [12,23,24,42,1];
+mapArr.map(function(item, index){
+	console.log(item)
+	console.log(index)
+})
+mapArr.map(item => {
+	console.log(item + '-----------')
+})
+
+
+// 扁平化n维数组
+let numArr1 = [[1,2,33],44,66]
+console.log(numArr1.flat(2))
+let numArr2 = [[1,2444,[33,88]],44]
+console.log(numArr2.flat(3))
+
+
+// Array.flat(n)是ES10扁平数组的api， n表示维度， n值为 Infinity时维度为无限大。
+
+
+
+
+</script>
+</html>
