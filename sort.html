@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>排序</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+
+var lian = '7*da*d?as'
+function test(val) {
+	console.log(val.indexOf('*?'))
+	if(val.indexOf('*')=== -1 && val.indexOf('?')=== -1) {
+		alert('有问号或者星号就行')
+	}
+	if (val.indexOf('**') !=-1 ) {
+		alert('星号不能连')
+	}
+	if (val.indexOf('*?') !=-1 ) {
+		alert('问号不能和星号挨在一起')
+	}
+	if (val.indexOf('*？') !=-1 ) {
+		alert('问号不能和星号挨在一起')
+	}
+	if (val.indexOf('?*') !=-1 ) {
+		alert('星号和问号不能挨在一起')
+	}
+	if (val.indexOf('？*')!=-1) {
+		alert('星号和问号不能挨在一起')
+	}
+}
+test(lian)
+
+
+
+function d(a,b){
+	return a-b
+}
+
+let arr = [1,13,9,11]
+let a = arr.sort(d)
+
+
+ // 冒泡实现排序
+let arring = [12,9,3,19];
+for(let i = 0;i<arring.length;i++){
+	for(let t = i+1;t<arring.length;t++) {
+		if (arring[i]>arring[t]) {
+			let temp = arring[i]
+			arring[i] = arring[t]
+			arring[t] = temp
+		}
+	}
+}
+console.log(arring)
+
+
+function Foo(name,age){
+	this.name = name
+}
+Foo.prototype.alertName = function () {
+	console.log(this.name)
+}
+var f = new Foo('zhangsan')
+f.printName = function(){
+	console.log(this.name)
+}
+console.log(f)
+
+
+// 一个原型链继承的栗子
+
+function Doo(name,age){
+	this.name = name
+	this.age = age
+}
+
+Doo.prototype.alertName= function(){
+	console.log(this.name)
+}
+
+function X(){
+	this.name = '小柴'
+}
+X.prototype = new Doo('府谷市民',25)
+
+var d = new X()
+console.log(d)
+console.log(d.alertName())
+
+// X继承Doo,d是X的实例，所以d也继承Doo,可以调用属性中的方法
+
+
+//call apply bind
+function fn1(name,age){
+	console.log(name)
+	console.log(this)
+}
+
+// fn1.call({x:999},'柴璐',25)
+// fn1.apply({x:999},['柴璐',25])
+
+function en(){} // 函数声明
+var go = function(){}  //函数表达式
+
+// bind必须用函数表达式去绑定
+var fn2 = function (name,age){
+	console.log(name)
+	console.log(this)
+}.bind({q:980})
+
+fn2('hh',23)
+
+
+
+// 如何理解作用域
+// 1、自由变量
+// 2、作用域链，即自由变量的查找
+// 3、闭包的俩个原场景
+
+//1、自由变量如下
+var names = 'zhangsan'
+console.log(names) // zhangsan
+var num = 100
+function t(){
+	var num = 200
+	console.log(num) //200
+}
+t()
+// 作用域链(一个变量不断的往父级找)
+var sd = 22
+function fg() {
+	var s2 = 666
+	// 当前作用域没有定义的变量，即自由变量
+	console.log(s2) // 666
+	console.log(sd) // 22
+}
+fg()
+var w = 123
+function w1() {
+	var v = 568
+	function w2() {
+		var c = 300
+		// 没有的会不断像父级找
+		console.log(w) // 123
+		console.log(v) // 568
+		console.log(c) // 300
+	}
+	w2()
+}
+w1()
+// 闭包
+// 1.函数作为返回值
+// 2、函数作为参数来传递
+
+function ss (){
+	var e = 888
+	return function(){
+		console.log(e)  //888  // 自由变量，会在他的父作用域去找即ss函数
+	}
+}
+
+var s1 = ss()
+var e = 999
+s1()
+
+function a1(){
+	var w = 543
+	return function(){
+		console.log(w)  //543 //自由变量，会在他的父作用域去找即ss函数
+	}
+}
+var z = a1()
+function a2(parm){
+	var w = 900
+	parm()
+}
+a2(z)
+
+// 获取随机数，要求是长度一致的字符串
+var random = Math.random()
+    random = random + '0000000000'
+    random = random.slice(0, 10)
+    console.log(random)
+
+// 写一个能遍历数组和对象的forEach函数
+function forEach(obj,fn){
+	if (obj instanceof Array) { // 准确判断是不是数组
+		obj.forEach((index,item)=>{
+			fn(index,item)
+		})
+	} else {
+		for(key in obj) {
+			fn(key,obj[key])
+		}
+	}
+}
+
+var arrNum = [22,34,1,56]
+forEach(arrNum,function(index,item){
+	console.log(index+'----'+item)
+})
+
+var obj = {a:1,b:3}
+forEach(obj,function(key,value){
+	console.log(key+'--------'+value)
+})
+
+// 获取2017-06-10格式的日期
+function formdate(dt) {
+	if(!dt) {
+		dt = new Date()
+	}
+	var year = dt.getFullYear()
+	var month = dt.getMonth() + 1
+	var data = dt.getDate()
+	if (month < 10) {
+		month = '0'+month 
+	}
+	if (data < 10){
+		data = '0'+ data
+	}
+	return year + '-' + month + '-' + data
+}
+console.log(formdate(new Date()))
+
+
+// 创建10个标签，点击的时候弹出来对应的序号
+// for(var i=0;i<10;i++) {
+// 	(function(i){
+// 		var a = document.createElement('a')
+// 		a.innerHTML = i+'<br>'
+// 		a.addEventListener('click',function(e){
+// 			e.preventDefault()
+// 			alert(i)
+// 		})
+// 		document.body.appendChild(a)
+// 	})(i)
+// }
+for(let t=0;t<10;t++) {
+		var v = document.createElement('a')
+		v.innerHTML = t+'<br>'
+		v.addEventListener('click',function(e){
+			e.preventDefault()
+			alert(t)
+		})
+		document.body.appendChild(v)
+}
+</script>
+</html>

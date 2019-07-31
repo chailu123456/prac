@@ -14,18 +14,22 @@
 
 
 var a =8;
-var func = (function(){
+var func = function(){
 	var a =10;
+	console.log(a)
 	return function(){
-		a++;
+		a++
 		console.log(a)
 	}
-})()
-func()
-func()
+}
+func()() //  11
+func()()
 
+let ss = 4;
+ss++
+console.log(ss)
 
-// for ( var i=1; i<=5; i++) {
+// for ( var i=1; i<=5; i++) {a = a++
 // 	setTimeout( function timer() {
 // 		console.log( i );
 // 	}, i*1000 );

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>es6 --class属性</title>
+</head>
+<body>
+	<div class="s" id="app">
+	 <input type="checkbox">
+	</div>
+	
+</body>
+<script type="text/javascript">
+class demo{
+
+}
+var mydemo1 = new demo()
+var mydemo2 = new demo()
+
+mydemo1.__proto__.name = function () {
+  return '哈哈哈'
+}
+
+console.log(mydemo1.name())
+console.log(mydemo2)
+
+
+let Foo = class {
+  ty() {
+    console.log('djakdjasnkj')
+  }
+};
+
+class Bar extends Foo { // 子类继承父类
+  we() {
+    aaa: [3,4,5,6]
+  }
+}
+let dd = new Bar()
+console.log(dd)
+console.log('===============')
+
+
+class Obj {
+  val = '申明的值';
+  constructor() {
+    this.getThis = () =>this
+    this.newVal = '构造函数申明的值'
+  }
+  static classMethod() {
+    return 'hello';
+  }
+}
+const myobj = new Obj()
+console.log(myobj.getThis()) 
+console.log(myobj.val) 
+
+console.log(myobj)
+console.log(Obj.classMethod())
+
+
+</script>
+</html>

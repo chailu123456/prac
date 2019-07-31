@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="file" class="upload">
+</body>
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.upload').change(function(){
+		console.log(33)
+		console.log(this.files)
+		let imgUrl={}
+		var reader = new FileReader();
+		reader.readAsDataURL(this.files[0]);
+  	reader.onload = function (res) {
+   		$.ajax({
+	   		url: 'http://localhost:3000/upload',
+	   		type: 'POST',
+	   		data: {base: res.target.result},
+	   		success:function(data) {
+	   			console.log(data)
+	   		}
+	   	})
+   	}
+	})
+})
+
+</script>
+
+</html>

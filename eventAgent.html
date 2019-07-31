@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件委托</title>
+</head>
+<body>
+	<ul id="demo">
+		<li>1111111111</li>
+		<li>22222222222</li>
+		<li>333333333333</li>
+		<li>44444444444444444444444</li>
+	</ul>
+	<button id="btn">新增li</button>
+</body>
+
+<script type="text/javascript">
+
+// 例子1. 页面有个ul包含着4个li，鼠标移动到li上，li背景变成红色，移出，背景恢复原色
+	var oUl = document.getElementById('demo')
+	oUl.onmouseover = function(ev) {
+		var ev = ev|| window.event;
+		var oLi = ev.srcElement|| ev.target
+		console.log(ev)
+		console.log(oLi)
+		console.log(oLi.nodeName)
+		if (oLi.nodeName.toLowerCase() == 'li') {
+				oLi.style.background = 'pink'
+		}
+		
+ 	}
+ 	oUl.onmouseout = function(ev) {
+ 		var ev = ev || window.event;
+ 		var oLi = ev.srcElement||ev.target
+ 		if (oLi.nodeName.toLowerCase() == 'li') {
+				oLi.style.background = ''
+		}
+ 	}
+	var btn = document.getElementById('btn')
+	btn.onclick=function(){
+		var newLi = document.createElement('li')
+		newLi.innerHTML = new Date()
+		oUl.appendChild(newLi)
+	}
+
+</script>
+
+</html>

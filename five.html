@@ -11,6 +11,14 @@
 	
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script src="./node_modules/babel-core/browser.min.js">
+
+import {bar,foo, fn0, fn1} from "./one.js";
+  console.log(bar+"_"+foo);
+  console.log('33344444444444444444444');
+</script>
+
 <script type="text/javascript">
 
 var app = new Vue({
@@ -22,7 +30,10 @@ var app = new Vue({
   	
   }
 })
-
+function zTime(t) {
+      return new Date(t).getTime() / 1000
+    }
+console.log(zTime("2019-04-05"))
 
 // 在一个数组中 找出里面其中两项相加后的和为num，如果存在就返回两个数的索引位置，否则false
 
@@ -64,7 +75,820 @@ console.log(numArr2.flat(3))
 // Array.flat(n)是ES10扁平数组的api， n表示维度， n值为 Infinity时维度为无限大。
 
 
+class Storage {
+
+  ss() {return '2222'}
+
+}
+const storage = new Storage();
+console.log(storage)
+
+
+async function fn() {
+  await Promise.reject('出错了')
+}
+fn().then(v=>console.log(v)).catch(e=>console.log(e))
+
+
+function www() {
+  setTimeout(()=>{
+    console.log('xian')
+  },3000)
+}
+
+function we() {
+  console.log('hhhhh----------------------')
+}
+
+
+async function rrr() {
+  // await Promise.all([www(),we()])
+  await www()
+  await we()
+}
+rrr()
+
+
+
 
 
 </script>
 </html>
+
+
+basepath：/api/geek/channel_scene
+服务：渠道场景管理
+
+
+<!-- 首页场景列表 -->
+path: /
+method:get
+req:{
+    pagesize
+    pagenum 
+    pnId            int
+    pnName          string 
+    pId             int   
+    pName           string  
+    pbId            int   
+    category1       string  
+    category2       string   
+    province        string   
+    city            string  
+    isCard          int
+    isBlack         int     //  -1 -非黑名单中 0-不限 1-黑名单中 
+    serverCate      int     // 0-导出全部服务 1-仅导出渠道服务 2-仅导出原场景服务
+    isExport        int     // 1-后台导出 0-查询 
+    exportAllField  int     // 0-导出基础字段 1-导出全部字段
+    hasServ         int     // 0 不限  1 有服务下发  2 无服务下发
+  }
+res:{
+    total:,
+    data:[{
+            pcId               
+            pId                
+            pbId               
+            pnId              
+            pName             
+            logoUrl           
+            province           
+            city               
+            cId                
+            address          
+            pcSyncFlag         
+            originServiceList  []int
+            channelServiceList []int
+        }...
+    ]
+}   
+
+<!--  加入黑名单 -->
+path: /blackList   
+method:put
+    pnId          int
+    pId             int  
+
+<!--  移出黑名单 -->
+path: /blackList   
+method:delete
+    pnId          int
+    pId             int  
+
+<!--  上架场景 首页-->
+path: /onshelf
+method:get
+req:{
+    pagesize  int
+      pagenum   int
+    pnId      int   
+    pName     string  
+    pId       int   
+    pIds      string  
+    pbName    string  
+    category1 int   
+    category2 int   
+    province  string  
+    city      string       
+  }
+res:{
+    totol:,
+    data:[{
+            pcId             
+            pId                
+            pbId               
+            pnId               
+            pName              
+            logoUrl            
+            province           
+            city               
+            cId               
+            address            
+            pcSyncFlag         
+            originServiceList  
+            channelServiceList
+      }
+    ]
+} 
+
+<!--  上架场景 上架操作-->
+path: /onshelf
+method:post
+req:{
+    pnId      int  
+    pName     string  
+    pId       int   
+    pIds      string  
+    pbName    string  
+    category1 int   
+    category2 int  
+    province  string  
+    city      string  
+  }
+
+<!--  (批量)下架-->
+path: /batchoffshelf
+method:post
+req:{
+    pcId    批量上架指定pcId,逗号(,)隔开
+    reason 
+  }
+
+<!-- 服务预览 -->
+path: /view
+method:get
+req:{
+    originServiceList  string 
+    channelServiceList string  
+  }
+res:{
+    origin_service:[{
+            serviceName 
+        iconUrl     
+       }],
+    channel_service:[{
+            serviceName 
+        iconUrl     
+        }]
+    
+}    
+
+
+<!-- 编辑服务 -->
+path: /view
+method:post
+req:{
+    sId     int  
+    sType   int 默认为 0 - H5 链接。1 - 快应用链接。2 - App deeplink。
+    sName   string `  
+    iId     int 
+    sActionUrl  string 
+    sAppPackage string `
+  }
+res:
+
+<!-- 编辑(首页) -->
+path: /edit
+method:get
+req:{
+    originServiceList  string 
+    channelServiceList string 
+}
+res:{
+    origin_service:[{
+            serviceName 
+        iconUrl     
+        }...],
+    channel_service:[{
+            serviceName 
+        iconUrl     
+        }...]
+}
+
+
+<!-- 编辑 修改-->
+path: /edit
+method:post
+req:{
+    pcId               int   
+    originServiceList  []int  
+    channelServiceList []int    
+}
+
+
+<!-- 新增渠道服务-->
+path: /edit
+method:put
+req:{
+    pcId        int 
+    sId         int 
+    serviceName string  
+    tag         string  
+    iconId      int 
+    iconUrl     string  
+    actionUrl   string  
+        sAppPackage string  
+  }
+
+
+--->渠道场景Banner
+<!-- 渠道场景Banner绑定列表 -->
+path: /channel_banner
+method:get
+req:{
+    pId       int   
+    pnId      int   
+    pName     string  
+    category1 int 
+    category2 int 
+    province  string 
+    city      string  
+    isBind    int //场景是否绑定banner 1-有绑定 0-无绑定  
+}
+res:[{
+        "pcId": 14,
+        "PName": "海岸城购物中心",
+        "cId": 109,
+        "logoUrl": "http://static.igeekee.cn/scenelogo/shenzhenhaiancheng.png-180x180style",
+        "province": "广东省",
+        "city": "深圳市",
+        "address": "南山区文心五路33号",
+        "pcbBannerList": [9999],
+        "pId": 0,
+        "pnId": 0
+      },
+]
+
+<!-- 新增,移除 渠道场景下的Banner -->
+path: /channel_banner
+method:post
+req:{
+    pId
+    pnId
+    pcbId                
+    pcbBannerList   []int 
+}
+res:{
+    data:true
+}
+
+<!-- 删除渠道场景Banner关联-->
+path: /channel_banner
+method:delete
+req:{
+   pcbId    
+}
+res:{
+    data:true
+}
+
+---->banner 管理
+<!-- Banner列表-->
+path: /banner
+method:get
+req:{
+    bId             int 
+    pnId            int 
+    bType           int  //默认为 0 - H5 链接。1 - 快应用链接。2 - App deeplink。
+    bTitle          string  
+    bStartDate      int 
+    bEndDate        int    
+    pcbBannerList   string 
+    status          int  // 0 不限 1 过期   2 生效中  3 未生效
+    timeLine        int // 0 不限 1 全天   2 时段
+    pcbBannerList   string --> banner的 id列表 1,2,3,4
+    isBind          int  
+}
+res:[{
+        "bId": 1,
+        "count": 0,
+        "pnId": 41,
+        "bTitle": "活动1：不分时段",
+        "bUrl": "http://www.pmdaniu.com/cloud/30008/ca44524684eb06f415dda764aa39ddaf-5937/1.html",
+        "bPackageName": "",
+        "bType": 0,
+        "bImageUrl": "http://www.pmdaniu.com/cloud/30008/ca44524684eb06f415dda764aa39ddaf-5937/images/index/u1.png",
+        "bStartDate": "1539216000",
+        "bEndDate": 1539993599,
+        "bRangeList": "",
+        "bCreateTime": 1539503407,
+        "bDeleteTime": 0,
+        "bUpdateTime": 0
+      },]
+
+
+<!-- 编辑Banner-->
+path: /banner
+method:post
+req:{
+   bId  
+   pnId 
+   bTitle 
+   bUrl
+   bPackageName
+   bType 
+   bImageUrl
+   bStartDate 
+   bEndDate 
+   bRangeList
+}
+res:{
+    data:true
+}
+
+
+<!-- 创建Banner-->
+path: /banner
+method:put
+req:{
+   pnId 
+   bTitle 
+   bUrl
+   bPackageName
+   bType 
+   bImageUrl
+   bStartDate 
+   bEndDate 
+   bRangeList
+}
+res:{
+    data:true
+}
+
+<!-- 删除Banner-->
+path: /banner
+method:delete
+req:{
+   bId
+}
+res:{
+    data:true
+}
+
+<!-- 查看当前banner的绑定信息  -->
+path: /banner/scene
+method:get
+req：{
+    pagesize
+    pagenum
+    bId  int    
+  pnId int    
+}
+res{
+
+}
+
+
+<!-- 关联或移除关联多个场景下的banner-->
+path: /banner/scene
+method:post
+req:{
+    pnId       int     渠道id
+    bId        int     当前banner的id
+    addPIds    string  需要添加该banner的场景的id(格式: 1,2,3,4)    
+    reducPIds  string  需要移除该banner的场景的id(格式: 1,2,3,4) 
+    disBindAll int     移除所有场景  1-执行删除所有
+}
+
+<!-- 关联新场景的搜索-->
+path: /banner/scene/add
+method:get
+req:{
+    pagesize
+    pagenum
+    bId       int   
+    pnId      int   
+    pId       int   
+    pName     string  
+    pbId      int   
+    category1 string   类别1
+    category2 string   类别2
+    province  string 
+    city      string `json:"city" form:"city" query:"city"`
+    isCard    int   
+    isExport  int   
+}
+
+
+
+
+
+basepath：/api/geek/scene
+服务：平台场景管理
+
+<!-- sdk热点信息 -->
+<!-- 查 -->
+path: /hot_info
+method: get
+req:
+  apiPId  int    // sdkPId,apiPId 二选一
+  sdkPId  int              
+res:
+
+<!-- 热点改前（二次确认弹窗信息） -->
+path: /hot_info
+method: get
+req:
+  apiPId    int      // sdkPId,apiPId 二选一
+  sdkPId    int        
+  apSsid     string    // 必填
+  apBssid    string  // 必填 
+res:
+  apSsid     string
+  apBssid    string
+  pId        int
+  pName      string
+  pRemark    string
+
+
+<!-- 热点强度 查 -->
+path/hot_info/pr_ratio
+method: get
+req:
+  apiPId    int    // sdkPId,apiPId 二选一
+  sdkPId    int   
+  
+
+<!-- 热点强度 增删改 -->
+path/hot_info/pr_ratio
+method: post
+req:
+  apiPId    int   // sdkPId,apiPId 二选一
+  sdkPId    int   
+  prRatio   float //PrRatio 传0时即作删除操作
+  prRemark  string  // 备注
+
+<!-- 热点审核 查 -->
+path:/hot_info/hot_audit
+method: get
+req:
+  pagesize      int 
+  pagenum       int 
+  recognizePoi        int   // 场景id
+  pName             string  // 场景名称
+  ssid            string  // apSsid 
+  startTime       int   // 毫秒
+  endTime         int   // 毫秒
+  exact           int   // 是否是精确查找 0-不是 1-是
+  miss            int     // 1-就是未关联热点
+  isExport        int     // 1-后台导出导出 0-查询
+  exportAllField    int     // 0-基础字段 1-全部字段(暂时没有)
+res:
+  recognizePoi int
+  poi          int
+  poiName      string   
+  ssid         string 
+  bssid        string   
+  recordTime   int
+  updateTime   int
+  location     []float64 
+
+<!-- 热点ssid修改 -->
+path: /hot_info/ssid
+method: post
+req:
+  apiPId    int    // sdkPId,apiPId 二选一
+  sdkPId    int  
+  aCityId   int64   // 必填 百度id  
+  oldApSsid string    // 必填
+  apSsid    string    // 必填 
+res:
+  code:200
+  message:"success"
+  data:"操作成功(3个冲突)"
+
+<!-- sdk热点ssid删除 -->
+path: /hot_info/ssid
+method: delete
+req:
+  apiPId    int    // sdkPId,apiPId 二选一
+  sdkPId    int  
+  apSsid    string    // 若该字段为空则全部解绑 
+res:
+
+<!-- sdk热点bssid修改 -->
+path: /hot_info/bssid
+method: post
+req:
+  apiPId    int    // sdkPId,apiPId 二选一
+  sdkPId    int  
+  aCityId     int     // 必填 
+  apId      int     // 必填 
+  apSsid    string    // 必填 
+  apBssid   string    // 必填 
+res:
+
+<!-- 热点bssid新增 -->
+path: /hot_info/bssid
+method: put
+req:
+  apiPId    int    // sdkPId,apiPId 二选一
+  sdkPId    int  
+  aCityId     int     // 必填 
+  apSsid    string    // 必填 
+  apBssid   string    // 必填 
+res:
+
+<!-- 热点bssid删除 -->
+path: /hot_info/bssid
+method: delete
+req: 
+  apiPId  int    // sdkPId,apiPId 二选一
+  sdkPId  int    
+  apId    int
+res:
+
+  
+<!-- poi楼层和其他映射关系id（点评，高德，oppo） -->
+<!-- 查 -->
+path:/floor
+method: get
+req:
+  pId   int
+res:
+
+<!-- poi楼层和其他映射关系id（点评，高德，oppo） -->
+<!-- 改 -->
+path:/floor
+method: post
+req:
+  pId               int           
+  pFloor          string    
+  relMapList  [
+    {
+      ppiId         int
+      ppiSource       int
+      ppiPoiId      int
+    }
+  ] 
+
+<!-- 场景围栏 -->
+<!-- 查 -->
+path/boundary
+method: get
+req:
+  pId   int   
+  
+<!-- 改 -->
+path/boundary
+method: post
+req:
+  pId        int   
+  pName      string  
+  baiduId    int  
+  createInfo []string     
+  updateInfo [
+    {
+      pbBoundary string  
+      pbId       int  
+    }
+  ]
+    
+<!-- 获取场景列表 -->
+<!-- 查 -->
+path: /
+method: get
+req:
+  pnId          int      // 渠道id
+  pnName        string   // 渠道名称
+  parentPId     int      // 父场景id
+  pId           int 
+  pName         string  
+  pbId          int 
+  category1     int 
+  category2     int 
+  province      string  
+  city          string  
+  isCard        int     // 0-全部 1-有服务 2- 无服务
+  isExport      int       // 1-后台导出导出 0-查询
+  exportAllField  int     // 0-基础字段 1-全部字段
+res:
+  pId         int    
+  pName       string  
+  phone1      string  
+  phone2      string   
+  logoUrl     string   
+  sceneUrl    string   
+  serviceList []int   
+  cId         int    
+  radius      float 
+  province    string   
+  city        string   
+  address     string   
+  longitude   string   
+  latitude    string   
+  baiduId     int    
+  parentId    int    
+  parentList  string   
+  createTime  int   
+  updateTime  int   
+  deleteTime  int   
+  sign        string  
+  pnId        int  
+  pbId        int   
+  remark      string  
+  class       int   
+  apCount     int
+  pbBoundary  string        
+
+<!-- 改 -->
+path: /
+method: post
+req:
+  pId         int    
+  pName       string   
+  pbId        int    
+  phone1      string  
+  phone2      string   
+  logoUrl     string 
+  cId         int   
+  province    string  
+  city        string 
+  address     string 
+  longitude   string 
+  latitude    string 
+  pbBoundary  string   
+  remark      string 
+res:
+         
+<!-- 删 -->
+path: /
+method: delete
+req:
+  pId         int    
+res:
+
+<!-- 增 -->
+path: /
+method: put
+req:
+  pId         int    
+  pName       string   
+  pbId        int    
+  phone1      string   
+  phone2      string   
+  logoUrl     string  
+  cId         int    
+  province    string   
+  city        string   
+  address     string   
+  longitude   string  
+  latitude    string   
+  pbBoundary  string   
+  remark      string   
+res:
+
+<!-- 父子场景 -->
+<!-- 查(子场景列表中搜索) -->
+path: /filiation/childSearch
+method: get
+req:
+  currentPid int     当前场景pid
+  pId        int     搜索框中填写的场景pid
+  pName      string  
+  pbName     string 
+  pbId       int   
+  category1  int  
+  category2  int  
+  province   string  
+  city       string  
+res:
+
+<!-- 查(添加父子场景列表中搜索) -->
+path: /filiation/addSearch
+method: get
+req:
+  currentPid int   当前场景pid
+  pId        int          搜索框中填写的场景pid
+  pName      string  
+  pbName     string  
+  pbId       int   
+  category1  int   
+  category2  int  
+  province   string  
+  city       string  
+res:
+
+<!-- 查(当前场景的父子场景列表) -->
+path: /filiation
+method: get
+req:
+  parentId  int   
+  pId       int   
+res:
+
+<!-- 增 -->
+path: /filiation
+method: put
+req:
+  parentIds string    // 最多一个p_id
+  childIds  string    // 可以p_id
+  pId       int   
+res:  
+
+<!-- 删 -->
+path: /filiation
+method: delete
+req:
+  parentIds int     // 最多一个p_id
+  childIds  string  // 可以p_id
+  pId       int     
+res:
+
+<!-- 服务信息 -->
+<!-- 查 -->
+path: /serviceinfo
+method: get
+req:
+  serviceList string  // s_id以逗号分隔(非数组格式)
+  pId         int    
+res:
+
+<!-- 新增通用服务的查询 -->
+全路径: api/geek/general_serv
+method: get
+req:
+  sId   int   
+  tag   string  
+  notIn string  // s_id以逗号分隔(非数组格式)
+res:
+
+<!-- 增 -->   
+path: /serviceinfo
+method: put             
+req:
+  serviceList []int  
+  pId         int    
+  sName       string  
+  iId         int     
+  appPackage  string  
+  actionUrl   string  
+  sType       int     //服务类型，默认为 0 - H5 链接。1 - 快应用链接。2 - App deeplink。
+res:
+
+<!-- 改 -->
+path: /serviceinfo
+method: post
+req:
+  sId        int   
+  sName      string  
+  iId        int     
+  appPackage string  
+  actionUrl  string  
+  sType      int    //服务类型，默认为 0 - H5 链接。1 - 快应用链接。2 - App deeplink。
+
+<!-- 删 -->  
+path: /serviceinfo
+method: delete
+req:
+  sId        int   
+
+<!-- 服务信息的绑定 -->
+<!-- 改 -->
+path: /serviceinfo/bind
+method: post
+req:
+  pId         int   
+  serviceList []int   
+res:
+
+<!-- 渠道服务配置 -->
+<!-- 查(获取场景渠道服务列表) -->
+path: /channel_server/channelList
+method: get
+req:
+  pId     int  
+res:
+  pnId               int
+  pcId               int 
+  pcSyncFlag         int 
+  pServiceList       []int 
+  originServiceList  []int   
+  channelServiceList []int  
+
+<!-- 场景多渠道一键下架 -->
+path: /channel_server/batchOffShelf
+method: delete
+req:
+  pId     int  
+  pnIdList    []int  
+res:

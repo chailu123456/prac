@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>手动写ajax</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+
+	var xhr = new XMLHttpRequest()
+	xhr.open('GET','/api',false)
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState ==4) {
+			if(xhr.status ==200) {
+				console.log(xhr.responseText)
+			}
+		}
+	}
+	xhr.send(null)
+
+	// 封装ajax
+	function ajax(method,url,async) {
+		// 1、声明XMLHttpRequest
+		var xhr = XMLHttpRequest;
+		// 创建XMLHttqRequest
+		xhr = new XMLHttpRequest()
+		// 2、设置请求状态改变时执行的函数
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState ==4 ) {
+				if(xhr.status == 200) {
+					console.log('请求完成，相应就绪')
+				}
+			}
+		 }
+		 // 3、初始化请求参数，还没发送请求
+		 xhr.open(method,url,async)
+		 // 4、发起请求
+		 xhr.send(null)
+	}
+	// 调用
+	ajax('GET','http://127.0.0.1:8080/user/show?name=hh',false)
+
+</script>
+</html>

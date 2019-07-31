@@ -5,7 +5,7 @@
 	<title>es</title>
 </head>
 <body>
-	
+	<input type="range">
 </body>
 <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
 <script type="text/javascript">
@@ -147,6 +147,13 @@ const [first, ...rest] = number
 console.log(rest) //2,3,4,5
 
 
+// es6合并对象
+let obj1 = {name:'chailu'};
+let obj2 = {sex:'boy'};
+let obj3 = {age:'23'};
+let newobj = Object.assign(obj1,obj2,obj3)
+console.log(newobj)
+console.log('------------------')
 
 for(var r=0;r<4;r++){
 	console.log(r)
@@ -241,6 +248,7 @@ var p = new Promise(function(resolve, reject){
         resolve('随便什么数据');
     }, 2000);
 });
+
 
 
 
