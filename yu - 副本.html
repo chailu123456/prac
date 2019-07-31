@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul id="list"></ul>
+</body>
+<script>
+
+
+var list = document.getElementById('list');
+var li;
+for(var i=0;i<10;i++){
+	li = document.createElement("li");
+	li.innerHTML =i;
+	list.append(li)
+}
+var cc = list.getElementsByTagName("li"); 
+for (let i = 0; i < cc.length; i++) {
+    cc[i].onclick = (function(i) {
+	    return function() {
+	        alert(i)
+	    };
+	})(i)
+}
+
+
+
+
+//冒泡排序
+var arr = [11,22,3,4,7,59,5,5,6,6,7];
+	for(var i=0;i<arr.length;i++){
+		for(var t=0;t<arr.length-1;t++){
+			if(arr[t]>arr[t+1]){
+				var temp = arr[t];
+				arr[t]=arr[t+1];
+				arr[t+1]=temp;
+			}
+		}
+	}
+console.log(arr);
+
+//数组去重
+for(var t=0;t<arr.length;t++){
+	for(var y=t+1;y<arr.length;y++){
+		if(arr[t]==arr[y]&& t != y){
+			arr.splice(y,1);
+		}
+	}
+}
+console.log(arr);
+
+
+var mytrr = [90,22,33,11,44,55,77];
+function pai(a,b){
+	return a-b;
+
+}
+console.log(mytrr.sort(pai));
+var yu=[];
+for(var w=0;w<arr.length;w++){
+	if(yu.indexOf(arr[w])==-1){
+		yu.push(arr[w]);
+	}
+}
+console.log(yu);
+
+var wan ='123456';
+
+wan = wan.split('');
+wan = wan.reverse();
+wan = wan.join('')
+console.log(wan)
+
+
+function bu(){
+	q=9;
+	var q;
+	console.log(q);
+}
+bu()
+
+var c=90;
+function yuq(){
+	c=9;
+	return;
+	function nuu(){}
+}
+yuq()
+console.log(c)
+
+
+</script>
+</html>
