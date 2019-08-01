@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>合并DOM插入</title>
+</head>
+<body>
+<ul id="list"></ul>
+</body>
+<script type="text/javascript">
+
+var oUl = document.getElementById('list')
+// 插入20个li标签
+var frag = document.createDocumentFragment();  // 首先创建一个文档碎片，保存到文档碎片中，最后插入到dom中，这样只操作一次dom
+for(var i =0;i<20;i++){
+	var oLi = document.createElement('li')
+	oLi.innerHTML = i;
+	frag.appendChild(oLi)
+}
+oUl.appendChild(frag)
+
+
+
+</script>
+</html>

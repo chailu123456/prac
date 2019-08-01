@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片懒加载</title>
+</head>
+<body>
+<img id="img1" src="logo.png" data-imgsrc="a.png" alt="">
+</body>
+<script type="text/javascript">
+// src为图片的默认地址，最后真正渲染的图片地址为data-imgsrc，得到data-imgsrc赋值给src
+var img1 = document.getElementById('img1')
+img1.src = img1.getAttribute('data-imgsrc')
+</script>
+</html>
